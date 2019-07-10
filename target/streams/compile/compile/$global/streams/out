@@ -1,0 +1,18 @@
+[0m[[0m[31merror[0m] [0m[0m/Users/StriderKeni/IdeaProjects/spark_test/src/main/scala/SparkTest.scala:1:8: object SparkSession is not a member of package org.apache.spark.sql[0m
+[0m[[0m[31merror[0m] [0m[0mimport org.apache.spark.sql.SparkSession[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/StriderKeni/IdeaProjects/spark_test/src/main/scala/SparkTest.scala:2:29: object functions is not a member of package org.apache.spark.sql[0m
+[0m[[0m[31merror[0m] [0m[0mimport org.apache.spark.sql.functions._[0m
+[0m[[0m[31merror[0m] [0m[0m                            ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/StriderKeni/IdeaProjects/spark_test/src/main/scala/SparkTest.scala:3:8: object Column is not a member of package org.apache.spark.sql[0m
+[0m[[0m[31merror[0m] [0m[0mimport org.apache.spark.sql.Column[0m
+[0m[[0m[31merror[0m] [0m[0m       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/StriderKeni/IdeaProjects/spark_test/src/main/scala/SparkTest.scala:8:18: encountered unrecoverable cycle resolving import.[0m
+[0m[[0m[31merror[0m] [0m[0mNote: this is often due in part to a class depending on a definition nested within its companion.[0m
+[0m[[0m[31merror[0m] [0m[0mIf applicable, you may wish to try moving some members into another object.[0m
+[0m[[0m[31merror[0m] [0m[0m    import spark.implicits._[0m
+[0m[[0m[31merror[0m] [0m[0m                 ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/StriderKeni/IdeaProjects/spark_test/src/main/scala/SparkTest.scala:25:33: not found: value udf[0m
+[0m[[0m[31merror[0m] [0m[0m    val positiveValidationUDF = udf(positiveValidation _)[0m
+[0m[[0m[31merror[0m] [0m[0m                                ^[0m
+[0m[[0m[31merror[0m] [0m[0m5 errors found[0m
