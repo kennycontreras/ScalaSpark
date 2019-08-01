@@ -44,17 +44,14 @@ object SplitData {
     val PathTrain = args(0)
     val OutputTrain = args(1)
 
-    var dfTrain = spark.read.format("com.databricks.spark.csv").option("inferSchema", "true").option("header","true").option("delimiter", ",").load(PathTrain)
+    var dfTrain = spark.read.format("com.databricks.spark.csv").option("inferSchema", "true").option("header","true").option("delimiter", ";").load(PathTrain)
 
     dfTrain = dfTrain.withColumn("target_date", col("target_date"))
     val Row(minValue: Timestamp, maxValue: Timestamp) = dfTrain.agg(min("target_date"), max("target_date")).head
 
-    println(minValue, maxValue)
-
     var diff: Double = (maxValue.getTime() - minValue.getTime()) / (1000.0 * 60 * 60 * 24) * 0.2 
     var maxJoda: DateTime = DateTime.parse((maxValue.toString.split(" "))(0))
     var subsMax: DateTime = maxJoda.minusDays(diff.toInt)
-    println(subsMax)
 
     def flagTrain = udf((date: Timestamp) => {
       var castDate: DateTime = DateTime.parse((date.toString.split(" "))(0))
@@ -65,10 +62,10 @@ object SplitData {
     var dfFlagTrain = dfTrain.withColumn("flag", flagTrain(col("target_date")))
     var dfFlagVal = dfFlagTrain.where(col("flag")===1)
     
-    dfFlagTrain = dfFlagTrain.withColumn("CATEGORY", col("category_id")).where(col("flag")===0)
-    dfFlagTrain.write.mode("overwrite").partitionBy("CATEGORY").option("header", "true").option("delimiter", ";").format("com.databricks.spark.csv").save(OutputTrain+"/training/" )
+    dfFlagTrain = dfFlagTrain.where(col("flag")===0)
+    dfFlagTrain.write.mode("overwrite").partitionBy("category_id_hashed").option("header", "true").option("delimiter", ";").format("com.databricks.spark.csv").save(OutputTrain+"/training/" )
 
-    dfFlagVal.withColumn("CATEGORY", col("category_id")).write.mode("overwrite").partitionBy("CATEGORY").option("header", "true").option("delimiter", ";").format("com.databricks.spark.csv").save(OutputTrain+"/validation/")
+    dfFlagVal.write.mode("overwrite").partitionBy("category_id_hashed").option("header", "true").option("delimiter", ";").format("com.databricks.spark.csv").save(OutputTrain+"/validation/")
 
   }
 
