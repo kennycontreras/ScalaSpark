@@ -12,3 +12,26 @@ package
 compile
 package
 exit
+sbt compile
+compile
+package
+compile
+package
+compile
+package
+compile
+package
+compile
+package
+compile
+package
+compile
+package
+compile
+package
+compile
+package
+compile
+package
+compile
+package

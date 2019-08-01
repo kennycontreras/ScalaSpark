@@ -1,11 +1,7 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/StriderKeni/IdeaProjects/spark_test/src/main/scala/SplitData.scala:23:37: type mismatch;[0m
-[0m[[0m[31merror[0m] [0m[0m found   : org.apache.spark.sql.Column[0m
-[0m[[0m[31merror[0m] [0m[0m required: String[0m
-[0m[[0m[31merror[0m] [0m[0m    dfTrain = dfTrain.withColumn(col("category_id"),"CATEGORY")[0m
-[0m[[0m[31merror[0m] [0m[0m                                    ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/StriderKeni/IdeaProjects/spark_test/src/main/scala/SplitData.scala:23:53: type mismatch;[0m
-[0m[[0m[31merror[0m] [0m[0m found   : String("CATEGORY")[0m
-[0m[[0m[31merror[0m] [0m[0m required: org.apache.spark.sql.Column[0m
-[0m[[0m[31merror[0m] [0m[0m    dfTrain = dfTrain.withColumn(col("category_id"),"CATEGORY")[0m
-[0m[[0m[31merror[0m] [0m[0m                                                    ^[0m
-[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/StriderKeni/IdeaProjects/spark_test/src/main/scala/SplitData.scala:66:33: overloaded method value where with alternatives:[0m
+[0m[[0m[31merror[0m] [0m[0m  (conditionExpr: String)org.apache.spark.sql.Dataset[org.apache.spark.sql.Row] <and>[0m
+[0m[[0m[31merror[0m] [0m[0m  (condition: org.apache.spark.sql.Column)org.apache.spark.sql.Dataset[org.apache.spark.sql.Row][0m
+[0m[[0m[31merror[0m] [0m[0m cannot be applied to (Boolean)[0m
+[0m[[0m[31merror[0m] [0m[0m    var dfFlagVal = dfFlagTrain.where(col("flag")==1)[0m
+[0m[[0m[31merror[0m] [0m[0m                                ^[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m
