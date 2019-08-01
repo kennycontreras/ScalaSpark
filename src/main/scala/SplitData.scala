@@ -42,9 +42,12 @@ object SplitData {
     }
 
     val PathTrain = args(0)
-    val OutputTrain = args(1)
+    val bucketOutput = args(1)
+    val dateFiles = args(2)
+    val country = args(3)
+    val dataType = args(4)
 
-    var dfTrain = spark.read.format("com.databricks.spark.csv").option("inferSchema", "true").option("header","true").option("delimiter", ";").load(PathTrain)
+    var dfTrain = spark.read.format("csv").option("inferSchema", "true").option("header","true").option("delimiter", ";").load(PathTrain)
 
     dfTrain = dfTrain.withColumn("target_date", col("target_date"))
     val Row(minValue: Timestamp, maxValue: Timestamp) = dfTrain.agg(min("target_date"), max("target_date")).head
@@ -63,9 +66,9 @@ object SplitData {
     var dfFlagVal = dfFlagTrain.where(col("flag")===1)
     
     dfFlagTrain = dfFlagTrain.where(col("flag")===0)
-    dfFlagTrain.write.mode("overwrite").partitionBy("category_id_hashed").option("header", "true").option("delimiter", ";").format("com.databricks.spark.csv").save(OutputTrain+"/training/" )
+    dfFlagTrain.write.mode("overwrite").partitionBy("category_id_hashed").option("header", "true").option("delimiter", ";").format("csv").save(bucketOutput+"data_training/2019/06/30/"+country+"/"+dataType+"/")
 
-    dfFlagVal.write.mode("overwrite").partitionBy("category_id_hashed").option("header", "true").option("delimiter", ";").format("com.databricks.spark.csv").save(OutputTrain+"/validation/")
+    dfFlagVal.write.mode("overwrite").partitionBy("category_id_hashed").option("header", "true").option("delimiter", ";").format("csv").save(bucketOutput+"data_val/2019/06/30/"+country+"/"+dataType+"/")
 
   }
 

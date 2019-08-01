@@ -1,7 +1,7 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/StriderKeni/IdeaProjects/spark_test/src/main/scala/SplitData.scala:66:33: overloaded method value where with alternatives:[0m
-[0m[[0m[31merror[0m] [0m[0m  (conditionExpr: String)org.apache.spark.sql.Dataset[org.apache.spark.sql.Row] <and>[0m
-[0m[[0m[31merror[0m] [0m[0m  (condition: org.apache.spark.sql.Column)org.apache.spark.sql.Dataset[org.apache.spark.sql.Row][0m
-[0m[[0m[31merror[0m] [0m[0m cannot be applied to (Boolean)[0m
-[0m[[0m[31merror[0m] [0m[0m    var dfFlagVal = dfFlagTrain.where(col("flag")==1)[0m
-[0m[[0m[31merror[0m] [0m[0m                                ^[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/StriderKeni/IdeaProjects/spark_test/src/main/scala/SplitDataAvro.scala:64:34: value getTime is not a member of org.joda.time.DateTime[0m
+[0m[[0m[31merror[0m] [0m[0m    var diff: Double = (maxValue.getTime() - minValue.getTime()) / (1000.0 * 60 * 60 * 24) * 0.2 [0m
+[0m[[0m[31merror[0m] [0m[0m                                 ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/StriderKeni/IdeaProjects/spark_test/src/main/scala/SplitDataAvro.scala:64:55: value getTime is not a member of org.joda.time.DateTime[0m
+[0m[[0m[31merror[0m] [0m[0m    var diff: Double = (maxValue.getTime() - minValue.getTime()) / (1000.0 * 60 * 60 * 24) * 0.2 [0m
+[0m[[0m[31merror[0m] [0m[0m                                                      ^[0m
+[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m
