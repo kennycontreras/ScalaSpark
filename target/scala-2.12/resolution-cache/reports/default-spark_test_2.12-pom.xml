@@ -4,10 +4,10 @@
 	<info
 		organisation="default"
 		module="spark_test_2.12"
-		revision="0.1"
+		revision="1.0"
 		conf="pom"
 		confs="compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, pom, scala-tool"
-		date="20190710145849"/>
+		date="20190731134013"/>
 	<dependencies>
 	</dependencies>
 </ivy-report>
