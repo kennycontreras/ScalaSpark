@@ -20,18 +20,18 @@ Args:
     3. Country
     4. Data Type (SLP, PLP)
     5. Flag 1=> Training Data, 2=> Validation Data
-    6. Date YYYY-MM-DD format
+    6. Date YYYY/MM/DD format
 """
 
-export CLUSTER_NAME = sod-cluster
+export CLUSTER_NAME=sod-cluster
 gcloud dataproc jobs submit spark \
     --cluster ${CLUSTER_NAME} --region us-central1 \
     --properties spark.task.maxFailures=40,spark.jars.packages=org.apache.spark:spark-avro_2.11:2.4.0,spark.default.parallelism=640,spark.sql.shuffle.partitions=7690 \
     --class "SplitDataAvro" \
-    --jars gs://bucket_testing_ml/project-spark/Split-Spark Project/spark_test_2.11-1.0.jar \
-    -- "gs://bucket_testing_ml/pairwise/2019-06-30/CHL/SLP/*.avro" \
+    --jars gs://bucket_testing_ml/project-spark/spark_test_2.11-1.0.jar \
+    -- "gs://bucket_testing_ml/pairwise/2019-06-30/CHL/PLP/*.avro" \
     "gs://bucket_testing_ml/" \
     "CHL" \
-    "SLP" \
-    "1" \
-    "2019-06-30"
+    "PLP" \
+    "0" \
+    "2019/06/30"

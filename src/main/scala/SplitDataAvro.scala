@@ -6,6 +6,10 @@ import org.joda.time.DateTime
 import org.joda.time.Days
 import java.sql.Timestamp
 import java.util.Calendar
+import org.apache.log4j._
+
+
+
 
 /*
 submit job on dataproc
@@ -29,18 +33,20 @@ spark-submit --class "SplitData" \
 
 */
 
-
 object SplitDataAvro {
 
   def main(args: Array[String]) {
 
     val spark =  SparkSession.
                     builder()
+                    .config("spark.ui.showConsoleProgress", "true")
                     .getOrCreate() 
                     
     import spark.implicits._
 
-    // se comprueba si hay argumentos
+
+    Logger.getLogger("org.apache.spark.SparkContext").setLevel(Level.WARN)
+
     if(args.length == 0) {
       println("Por favor ingresar parametros")
     }
@@ -51,6 +57,12 @@ object SplitDataAvro {
     val dataType = args(3)
     val flag: Integer = args(4).toInt
     val dateData = args(5)
+    
+
+    var pathTrain  = bucketOutput+"data_training/" +dateData+ "/" +country+ "/" +dataType+ "/"
+    var pathVal =  bucketOutput+"data_val/" +dateData+ "/" +country+ "/" +dataType+ "/"
+    println(s"\nPath Training: ${pathTrain} ")
+    println(s"Path Validation: ${pathVal} \n")
 
     var dfTrain = spark.read.format("avro").option("header", "true").load(PathTrain)
 
@@ -64,7 +76,7 @@ object SplitDataAvro {
 
     // var diff: Double = (maxValue.toLocal - minValue.getTime()) / (1000.0 * 60 * 60 * 24) * 0.2 
     var diff: Double = Days.daysBetween(minValue.toLocalDate(), maxValue.toLocalDate()).getDays() * 0.2
-    var subsMax: DateTime = maxValue.minusDays(diff.toInt)
+    var subsMax: DateTime = maxValue.minusDays(3) 
 
     def flagTrain = udf((date: String) => {
       var castDate: DateTime = DateTime.parse(date)
@@ -79,10 +91,12 @@ object SplitDataAvro {
     if (flag == 1) {
       var dfFlagVal = dfFlagTrain.where(col("flag")===1)  
       println("Writing Training Data...")
+      println(s"Destination Folder: ${bucketOutput+"data_training/" +dateData+ "/" +country+ "/" +dataType+ "/"} \n")
       dfFlagVal.repartition(col("category_id_hashed")).write.mode("overwrite").partitionBy("category_id_hashed").option("header", "true").option("delimiter", ";").format("csv").save(bucketOutput+"data_training/" +dateData+ "/" +country+ "/" +dataType+ "/")  
     } else {
       dfFlagTrain = dfFlagTrain.where(col("flag")===0)
       println("Writing Validation Data...")
+      println(s"Destination Folder: ${bucketOutput+"data_val/" +dateData+ "/" +country+ "/" +dataType+ "/"} \n")
       dfFlagTrain.repartition(col("category_id_hashed")).write.mode("overwrite").partitionBy("category_id_hashed").option("header", "true").option("delimiter", ";").format("csv").save(bucketOutput+"data_val/" +dateData+ "/" +country+ "/" +dataType+ "/")  
     }
     println("\nDone!\n")

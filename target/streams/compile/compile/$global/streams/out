@@ -1,7 +1,7 @@
-[0m[[0m[31merror[0m] [0m[0m/Users/StriderKeni/IdeaProjects/spark_test/src/main/scala/SplitDataAvro.scala:82:241: unclosed string literal[0m
-[0m[[0m[31merror[0m] [0m[0m      dfFlagVal.repartition(col("category_id_hashed")).write.mode("overwrite").partitionBy("category_id_hashed").option("header", "true").option("delimiter", ";").format("csv").save(bucketOutput+"data_training/"+  /"+country+"/"+dataType+"/")  [0m
-[0m[[0m[31merror[0m] [0m[0m                                                                                                                                                                                                                                                ^[0m
-[0m[[0m[31merror[0m] [0m[0m/Users/StriderKeni/IdeaProjects/spark_test/src/main/scala/SplitDataAvro.scala:82:216: ')' expected but string literal found.[0m
-[0m[[0m[31merror[0m] [0m[0m      dfFlagVal.repartition(col("category_id_hashed")).write.mode("overwrite").partitionBy("category_id_hashed").option("header", "true").option("delimiter", ";").format("csv").save(bucketOutput+"data_training/"+  /"+country+"/"+dataType+"/")  [0m
-[0m[[0m[31merror[0m] [0m[0m                                                                                                                                                                                                                       ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/StriderKeni/IdeaProjects/spark_test/src/main/scala/SplitDataPrediction.scala:70:5: Unmatched closing brace '}' ignored here[0m
+[0m[[0m[31merror[0m] [0m[0m    } else {[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/StriderKeni/IdeaProjects/spark_test/src/main/scala/SplitDataPrediction.scala:70:7: ';' expected but 'else' found.[0m
+[0m[[0m[31merror[0m] [0m[0m    } else {[0m
+[0m[[0m[31merror[0m] [0m[0m      ^[0m
 [0m[[0m[31merror[0m] [0m[0mtwo errors found[0m
